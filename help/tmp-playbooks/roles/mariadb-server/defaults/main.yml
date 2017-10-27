@@ -1,0 +1,7 @@
+---
+install: '1'
+root_password: '123'
+database: db
+user: user
+password: password
+dump: ''

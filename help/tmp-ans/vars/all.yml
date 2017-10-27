@@ -1,0 +1,24 @@
+---
+server:
+    install: '1'
+    timezone: Europe/Sofia
+    locale: en_US.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: trusty64, hostname: default, ip: 192.168.10.10, memory: '512', sharedfolder: ./, syncType: '0' }
+nginx:
+    install: '1'
+    docroot: /vagrant
+    servername: myApp.vb
+mariadb:
+    install: '1'
+    root_password: '123'
+    database: db
+    user: user
+    password: password
+    dump: ''
+php:
+    install: '1'
+    ppa: php5-5.6
+    packages: [php5-cli, php5-intl, php5-mcrypt, php5-mysql]
+

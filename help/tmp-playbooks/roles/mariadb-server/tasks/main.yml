@@ -1,0 +1,21 @@
+---
+
+- shell: hostname
+  register: current_hostname
+
+- name: Install MariaDB
+  apt: name=mariadb-server state=present
+  
+- name: mariadb-server | Update root password for all root accounts
+  mysql_user: name=root host={{ item }} check_implicit_admin=yes password={{ root_password }} login_user=root login_password={{ root_password }}
+  with_items:
+    - "{{ current_hostname.stdout | lower }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: mariadb-server | Ensure anonymous users are not in the database
+  mysql_user: name='' host={{ item }} state=absent login_user=root login_password={{ root_password }}
+  with_items:
+    - localhost
+    - "{{ current_hostname.stdout | lower }}"

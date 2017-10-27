@@ -1,0 +1,7 @@
+---
+install: '1'
+root_password: 123
+database: ecomm
+user: ecomm
+password: 123
+dump: ''
