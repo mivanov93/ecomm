@@ -1,7 +1,9 @@
 {
-    "name": "xor/ecomm",
+    "name": "x0r/ecomm",
     "description": "Ecomm slim php",
     "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.6.0",
         "slim/slim": "2.*",
@@ -9,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Xor\\Ecomm\\": "src/"
+            "Ecomm\\": "src/"
         }
     }
 }
