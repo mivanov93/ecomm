@@ -1,6 +1,6 @@
 {
     "name": "x0r/ecomm",
-    "description": "Ecomm slim php",
+    "description": "Ecomm slim 2.0 php",
     "type": "project",
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -11,7 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ecomm\\": "src/"
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     }
 }

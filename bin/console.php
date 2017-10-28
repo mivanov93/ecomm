@@ -10,11 +10,14 @@ use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\Version;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$path = [__DIR__.'/../src/Entities'];
+$path = [__DIR__ . '/../src/Entities'];
 $devMode = true;
 
 $config = Setup::createAnnotationMetadataConfiguration($path, $devMode);
@@ -42,7 +45,8 @@ $cli->setHelperSet($helpers);
 
 // Register All Doctrine Commands
 ConsoleRunner::addCommands($cli);
-
+$webDev = new \Ecomm\Commands\WebServer('webserver:run', __DIR__ . "/../web", __DIR__ . "/../web/index.php", 8080);
+$cli->add($webDev);
 // Runs console application
 $cli->run();
 
