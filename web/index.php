@@ -1,25 +1,24 @@
 <?php
 
-use Ecomm\Test;
 use Slim\Slim;
 
-if (isset($_SERVER['HTTP_CLIENT_IP']) ||
-        isset($_SERVER['HTTP_X_FORWARDED_FOR']) ||
-        !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'fe80::1', '::1']) || php_sapi_name() === 'cli-server')
-) {
-    header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
-}
+//if (isset($_SERVER['HTTP_CLIENT_IP']) ||
+//        isset($_SERVER['HTTP_X_FORWARDED_FOR']) ||
+//        !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'fe80::1', '::1']) || php_sapi_name() === 'cli-server')
+//) {
+//    header('HTTP/1.0 403 Forbidden');
+//    exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
+//}
 
 $debug = true;
 
 //\ini_set('error_log', __DIR__ . "/../logs/development.log");
-\ini_set('display_errors', $debug ? 1 : 0);
+\ini_set('display_errors', $debug);
 \ini_set('log_errors', 1);
-\ini_set('display_startup_errors', $debug ? 1 : 0);
+\ini_set('display_startup_errors', $debug);
 \date_default_timezone_set("Europe/Sofia");
 \error_reporting(-1);
-
+/*
 $errorHandler = function ($errno, $message, $file, $line) {
     if (\error_reporting() === 0) {
         return;
@@ -69,23 +68,32 @@ $exceptionHandler = function (Exception $ex) use(&$debug) {
 \register_shutdown_function($shutdownHandler);
 \set_error_handler($errorHandler);
 \set_exception_handler($exceptionHandler);
-\ini_set('display_errors', 0);
+\ini_set('display_errors', );
 \ini_set('display_startup_errors', 0);
+*/
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = new Slim();
+
 $app->notFound(function () use ($app) {
     /* @var $resp \Slim\Http\Response */
     /* @var $app Slim */
     $resp = $app->response();
     $resp->body(json_encode('not found'));
 });
-$app->get('/hello/:name', function ($name) use ($app) {
+
+$app->get('/', function ($name) use ($app) {
+    echo 123;
     /* @var $resp \Slim\Http\Response */
     /* @var $app Slim */
     $resp = $app->response();
     $resp->body('he24llo ' . $name);
 });
-
-$app->run();
+$app->get('/hello/:name', function ($name) use ($app) {
+    echo 123;
+    /* @var $resp \Slim\Http\Response */
+    /* @var $app Slim */
+    $resp = $app->response();
+    $resp->body('he24llo ' . $name);
+});
