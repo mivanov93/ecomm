@@ -7,7 +7,7 @@
  * @license https://raw.githubusercontent.com/juliangut/slim-doctrine-middleware/master/LICENSE
  */
 
-namespace Ecomm\Middleware;
+namespace Ecomm\Services;
 
 use BadMethodCallException;
 use Doctrine\Common\Cache\ApcCache;

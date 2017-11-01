@@ -1,5 +1,6 @@
 {
     "doctrine": {
+        "debug":true,
         "connection": {
             "driver": "pdo_mysql",
             "user": "ecomm",

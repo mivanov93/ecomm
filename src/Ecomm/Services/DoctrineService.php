@@ -1,4 +1,5 @@
 <?php
+
 ;
 
 /**
@@ -8,7 +9,7 @@
  * @license https://raw.githubusercontent.com/juliangut/slim-doctrine-middleware/master/LICENSE
  */
 
-namespace Ecomm\Middleware;
+namespace Ecomm\Services;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\ORM\Configuration;
@@ -23,22 +24,21 @@ use Slim\Slim;
 /**
  * Doctrine handler service.
  */
-class DoctrineService  {
+class DoctrineService {
 
     /**
      * @var array
      */
     protected $options = [];
-    public $app;
+    protected $em;
 
     /**
      * Public constructor.
      *
      * @param Slim            $this->app
      */
-    public function __construct(Slim $app)
-    {
-        $this->app = $app;
+    public function __construct(array $options) {
+        $this->setOptions($options);
     }
 
     /**
@@ -94,15 +94,10 @@ class DoctrineService  {
      * @throws RuntimeException
      */
     public function setup() {
-        $options = $this->app->config('doctrine');
-        if (is_array($options)) {
-            $this->setOptions($this->options, $options);
-        }
-
         $proxyDir = $this->getOption('proxy_path');
         $cache = DoctrineCacheFactory::configureCache($this->getOption('cache_driver'));
 
-        $config = Setup::createConfiguration(!!$this->app->config('debug'), $proxyDir, $cache);
+        $config = Setup::createConfiguration(!!$this->getOption('debug'), $proxyDir, $cache);
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
         $this->setupAnnotationMetadata();
@@ -114,11 +109,12 @@ class DoctrineService  {
 
         $connection = $this->getOption('connection');
 
-        $this->app->container->singleton(
-                'entityManager', function () use ($connection, $config) {
-            return EntityManager::create($connection, $config);
-        }
-        );
+        $this->em = EntityManager::create($connection, $config);
+    }
+
+    //todo: lazy create em here
+    public function getEm() {
+        return $this->em;
     }
 
     /**

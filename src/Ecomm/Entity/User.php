@@ -1,9 +1,11 @@
 <?php
 
+use Ecomm\Repository\UserRepository;
+
 namespace Ecomm\Entity;
 
 /**
- * @ORM\Entity(repositoryClass="Ecomm\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="UserRepository")
  * @ORM\Table(name="ecomm_user")
  *
  */

@@ -8,7 +8,7 @@ use Ecomm\Main;
 \date_default_timezone_set("Europe/Sofia");
 \error_reporting(-1);
 
-require_once __DIR__ . '/../src/Main.php';
+require_once __DIR__ . '/../src/Ecomm/Main.php';
 
 $main = new Main(__DIR__ . "/../config/dev.json");
 

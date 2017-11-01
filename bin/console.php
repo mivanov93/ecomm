@@ -24,7 +24,7 @@ $path = [realpath(__DIR__ . '/../src/Ecomm/Entity')];
 
 $devMode = true;
 
-$config = Setup::createAnnotationMetadataConfiguration($path, $devMode);
+$config = Setup::createAnnotationMetadataConfiguration($path, $devMode, null, null, false);
 
 $connectionOptions = $cfg['connection'];
 

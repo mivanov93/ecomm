@@ -6,12 +6,13 @@ use Doctrine\ORM\EntityManager;
 use Ecomm\Auth\Acl;
 use Ecomm\Auth\AuthAdapter;
 use Ecomm\Entity\User;
+use Ecomm\Services\DoctrineService;
 use Ecomm\Utils\JsonCfg;
 use JeremyKendall\Slim\Auth\Bootstrap as AuthBoostrap;
 use Slim\Slim;
 use Zend\Authentication\AuthenticationService;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 class Main {
 
@@ -21,10 +22,10 @@ class Main {
 
         $jsonCfg = new JsonCfg($jsonCfgPath);
         $this->slim = new Slim($jsonCfg->getAsArray());
-        $docSrv=new Middleware\DoctrineService($this->slim);
+        $docSrv = new DoctrineService($jsonCfg->getAsArray()['doctrine']);
         $docSrv->setup();
         /* @var $em EntityManager */
-        $em = $this->slim->container->get('entityManager');
+        $em = $docSrv->getEm();
         $em->getRepository(User::class);
         $adapter = new AuthAdapter();
         $acl = new Acl();
