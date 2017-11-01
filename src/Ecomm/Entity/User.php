@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecomm\Entities;
+namespace Ecomm\Entity;
 
 class User {
   

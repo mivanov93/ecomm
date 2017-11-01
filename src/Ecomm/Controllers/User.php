@@ -8,9 +8,21 @@ namespace Ecomm\Controllers;
  * @author x0r
  */
 class User {
+
     public function __construct($userRepo) {
-    }
-    public function functionName($param) {
         
     }
+
+    public function register($param) {
+        
+    }
+
+    public function login($param) {
+        
+    }
+
+    public function logout($param) {
+        
+    }
+
 }
