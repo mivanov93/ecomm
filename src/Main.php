@@ -7,6 +7,7 @@ use Ecomm\Auth\AuthAdapter;
 use Ecomm\Utils\JsonCfg;
 use JeremyKendall\Slim\Auth\Bootstrap as AuthBoostrap;
 use Slim\Slim;
+use Zend\Authentication\AuthenticationService;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -28,11 +29,11 @@ class Main {
 
     private function setRoutes() {
         $app = $this->slim;
-        
+
         $app->notFound(function() use ($app) {
             echo "Current route is " . $app->request()->getPathInfo();
         });
-        
+
         $app->map('/login', function () use ($app) {
             $username = $app->request->post('username');
             $password = $app->request->post('password');
@@ -40,16 +41,21 @@ class Main {
             $result = $app->authenticator->authenticate($username, $password);
 
             if ($result->isValid()) {
-                $app->redirect('/myposts');
+                $app->response()->setBody('logged in');
             } else {
                 $app->redirect('/unauthorized');
             }
         })->via('POST')->name('login');
-
+        $app->get('/logout', function () use ($app) {
+            $app->authenticator->logout();
+            $app->redirect('/posts');
+        });
         $app->map('/myposts', function() use($app) {
+            /* @var $auth AuthenticationService */
+            $auth = $app->auth->getIdentity();
+            var_dump($auth);
             $app->response()->body("\n all posts \n");
-            var_dump($_COOKIE);
-        })->via('GET','POST');
+        })->via('GET');
         $app->map('/unauthorized', function () use ($app) {
             $app->response()->setStatus(401);
             $app->response()->body("\n unauthorized \n");
