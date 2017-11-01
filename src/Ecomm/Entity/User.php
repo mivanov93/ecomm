@@ -10,10 +10,6 @@ class User {
     private $email;
     private $password;
 
-    function getRole() {
-        return 'member';
-    }
-
     public function getId() {
         return $this->id;
     }
@@ -49,5 +45,33 @@ class User {
     public function setPassword($password) {
         $this->password = $password;
     }
+    /**
+     * @var string
+     */
+    private $role;
 
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     *
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 }

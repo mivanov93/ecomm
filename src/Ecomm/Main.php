@@ -26,8 +26,11 @@ class Main {
         $docSrv->setup();
         /* @var $em EntityManager */
         $em = $docSrv->getEm();
-        $em->getRepository(User::class);
-        $adapter = new AuthAdapter();
+        $userRepo = $em->getRepository(User::class);
+//        $userRepo->findAll();
+////        $userRepo->registerUser(['username'=>"pesho","password"=>"got it",
+////            "role"=>"member","email"=>"mail@mw.com","fullName"=>"Pesho Peshev"]);
+        $adapter = new AuthAdapter($userRepo);
         $acl = new Acl();
 
         $authBootstrap = new AuthBoostrap($this->slim, $adapter, $acl);
@@ -41,11 +44,11 @@ class Main {
         $app->notFound(function() use ($app) {
             echo "Current route is " . $app->request()->getPathInfo();
         });
+        $app->error(function() {});
 
         $app->map('/login', function () use ($app) {
             $username = $app->request->post('username');
             $password = $app->request->post('password');
-
             $result = $app->authenticator->authenticate($username, $password);
 
             if ($result->isValid()) {

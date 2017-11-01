@@ -20,11 +20,11 @@ require __DIR__ . '/../vendor/autoload.php';
 $jsonCfg = new JsonCfg(__DIR__ . "/../config/dev.json");
 $cfg = $jsonCfg->getAsArray()['doctrine'];
 
-$path = [realpath(__DIR__ . '/../src/Ecomm/Entity')];
+$path = [realpath(__DIR__ . '/../config/doctrine')];
 
 $devMode = true;
 
-$config = Setup::createAnnotationMetadataConfiguration($path, $devMode, null, null, false);
+$config = Setup::createXMLMetadataConfiguration($path, $devMode, null, null, false);
 //AnnotationRegistry::registerLoader(
 //        function ($class) {
 //    $file = str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";

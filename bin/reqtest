@@ -1,7 +1,2 @@
-curl -L -X POST -i -H "Content-type: application/json" -X POST http://192.168.50.4:8080/login -d '
-    {
-        "username":"user",
-        "password":"password"
-    }
-    '
+curl -L -X POST -i -d "username=pesho&password=got+it" -H "Content-Type: application/x-www-form-urlencoded" http://192.168.50.4:8080/login 
 
