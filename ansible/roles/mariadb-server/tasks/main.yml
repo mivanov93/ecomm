@@ -33,8 +33,10 @@
   mysql_db: name={{ database }} state=present
 
 - name: Create MySQL user for ecomm
-  mysql_user: host={{ vagrant.private_host_ip }} name={{ user }} password={{ password }} priv={{ database }}.*:ALL state=present
-  
+  mysql_user: host={{ item }} name={{ user }} password={{ password }} priv={{ database }}.*:ALL state=present
+  with_items:
+    - localhost
+    - "{{ vagrant.private_host_ip }}"
 #- name: mariadb-server | Update root password for all root accounts
 #  mysql_user: name=root host={{ item }} check_implicit_admin=yes password={{ root_password }} login_user=root login_password={{ root_password }}
 #  with_items:

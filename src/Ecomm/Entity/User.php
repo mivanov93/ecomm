@@ -1,63 +1,18 @@
 <?php
 
-use Ecomm\Repository\UserRepository;
-
 namespace Ecomm\Entity;
 
-/**
- * @ORM\Entity(repositoryClass="UserRepository")
- * @ORM\Table(name="ecomm_user")
- *
- */
 class User {
+
+    private $id;
+    private $fullName;
+    private $username;
+    private $email;
+    private $password;
 
     function getRole() {
         return 'member';
     }
-
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $fullName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $password;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     public function getId() {
         return $this->id;
