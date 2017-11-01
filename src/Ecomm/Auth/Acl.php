@@ -1,18 +1,12 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Acl
  *
  * @author x0r
  */
 
-namespace Ecomm\Acl;
+namespace Ecomm\Auth;
 
 use Zend\Permissions\Acl\Acl as ZendAcl;
 
@@ -29,20 +23,25 @@ class Acl extends ZendAcl {
         // Application resources == Slim route patterns
         $this->addResource('/');
         $this->addResource('/posts');
+        $this->addResource('/myposts');
         $this->addResource('/post/add');
         $this->addResource('/post/edit');
         $this->addResource('/post/delete');
         $this->addResource('/login');
         $this->addResource('/register');
         $this->addResource('/logout');
+        $this->addResource('/unauthorized');
         // APPLICATION PERMISSIONS
         // Now we allow or deny a role's access to resources. The third argument
         // is 'privilege'. We're using HTTP method as 'privilege'.
         $this->allow('guest', '/', 'GET');
-        $this->allow('guest', '/login', array('GET', 'POST'));
+        $this->allow('guest', '/posts', ['GET', 'POST']);
+        $this->allow('guest', '/unauthorized', ['GET', 'POST']);
+        $this->allow('guest', '/login', ['GET', 'POST']);
         $this->allow('guest', '/logout', 'GET');
 
-        $this->allow('member', '/post/*', 'GET');
+        $this->allow('member', '/post/add', 'GET');
+        $this->allow('guest', '/myposts', ['GET', 'POST']);
     }
 
 }
