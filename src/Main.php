@@ -2,8 +2,10 @@
 
 namespace Ecomm;
 
+use Doctrine\ORM\EntityManager;
 use Ecomm\Auth\Acl;
 use Ecomm\Auth\AuthAdapter;
+use Ecomm\Entity\User;
 use Ecomm\Utils\JsonCfg;
 use JeremyKendall\Slim\Auth\Bootstrap as AuthBoostrap;
 use Slim\Slim;
@@ -19,6 +21,11 @@ class Main {
 
         $jsonCfg = new JsonCfg($jsonCfgPath);
         $this->slim = new Slim($jsonCfg->getAsArray());
+        $docSrv=new Middleware\DoctrineService($this->slim);
+        $docSrv->setup();
+        /* @var $em EntityManager */
+        $em = $this->slim->container->get('entityManager');
+        $em->getRepository(User::class);
         $adapter = new AuthAdapter();
         $acl = new Acl();
 

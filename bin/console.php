@@ -17,18 +17,16 @@ use Symfony\Component\Console\Input\InputInterface;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$path = [__DIR__ . '/../src/Entities'];
+$jsonCfg = new Ecomm\Utils\JsonCfg(__DIR__ . "/../config/dev.json");
+$cfg = $jsonCfg->getAsArray()['doctrine'];
+
+$path = [realpath(__DIR__ . '/../src/Ecomm/Entity')];
+
 $devMode = true;
 
 $config = Setup::createAnnotationMetadataConfiguration($path, $devMode);
 
-$connectionOptions = array(
-    'driver' => 'pdo_mysql',
-    'host' => '',
-    'dbname' => '',
-    'user' => '',
-    'password' => '',
-);
+$connectionOptions = $cfg['connection'];
 
 $em = EntityManager::create($connectionOptions, $config);
 

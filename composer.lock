@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6305eb0ad1b1ab6096c80c73dd797205",
+    "content-hash": "0683f0f1e3ff0a2cdbe2f61d6c437dc5",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -764,6 +764,59 @@
                 "zf2"
             ],
             "time": "2016-01-18T16:55:36+00:00"
+        },
+        {
+            "name": "juliangut/slim-doctrine-middleware",
+            "version": "0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juliangut/slim-doctrine-middleware.git",
+                "reference": "87edcff0cd1b1259ea350c7dfadf0e88d5ea58eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/juliangut/slim-doctrine-middleware/zipball/87edcff0cd1b1259ea350c7dfadf0e88d5ea58eb",
+                "reference": "87edcff0cd1b1259ea350c7dfadf0e88d5ea58eb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "~2.4",
+                "php": ">=5.4",
+                "slim/slim": "~2.4, >=2.4.3"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "~2.2",
+                "phpunit/phpunit": "~4.5",
+                "sebastian/phpcpd": "~2.0",
+                "squizlabs/php_codesniffer": "~2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jgut\\Slim\\Middleware\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Julián Gutiérrez",
+                    "email": "juliangut@gmail.com",
+                    "homepage": "http://juliangut.com"
+                }
+            ],
+            "description": "Slim Framework Doctrine middleware",
+            "homepage": "http://github.com/juliangut/slim-doctrine-middleware",
+            "keywords": [
+                "doctrine",
+                "framework",
+                "handler",
+                "middleware",
+                "slim"
+            ],
+            "time": "2015-09-04T17:39:19+00:00"
         },
         {
             "name": "psr/log",

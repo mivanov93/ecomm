@@ -1,12 +1,14 @@
 {
     "doctrine": {
-        "db": {
+        "connection": {
+            "driver": "pdo_mysql",
             "user": "ecomm",
-            "pass": "123",
-            "db": "ecomm",
+            "password": "123",
+            "dbname": "ecomm",
             "host": "192.168.50.4",
             "port": "3306"
-        }
+        },
+        "xml_paths": "/vagrant/config/doctrine"
     },
     "debug": true,
     "log.enabled": true,
